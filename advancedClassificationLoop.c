@@ -16,7 +16,7 @@ for(int i=0;i<maxSize;i++)
 arr1[i]=x%10;
 arr2[count-i]=x%10;
 }
-for(int i=0;i<arr1.length;i++)
+for(int i=0;i<maxSize;i++)
 {
 if(arr1[i]!=arr2[i]){return 0;}
 }
