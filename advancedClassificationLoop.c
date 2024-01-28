@@ -1,59 +1,66 @@
-#define maxSize 10
-int isPolindrom(int x)
-{
-int arr1[maxSize];
-int arr2[maxSize]; 
-int count=0;
-int copyX=x;
-while (x>0)
-{
-    count++;
-    copyX/10;
-}
+#include <stdio.h>
+#include "NumClass.h"
 
-for(int i=0;i<maxSize;i++)
-{
-arr1[i]=x%10;
-arr2[count-i]=x%10;
-}
-for(int i=0;i<maxSize;i++)
-{
-if(arr1[i]!=arr2[i]){return 0;}
-}
-return 1;
+int powerOf10(int exponent) {
+    int result = 1;
+    for (int i = 0; i < exponent; i++) {
+        result *= 10;
+    }
+    return result;
+}  
+ 
+ int isPalindrome (int x){
+    int counter = 0;
+    int y = x;
+    int z = x;
+    int p = x;
 
+    while(y>=1){// how many digit the number has
+        y/=10;
+        counter++;
+    }
 
+    for (int i = 0 ;i < counter ; i++){
+        int h = p%10;//start at the last digit
+        int b = (z/ powerOf10(counter -1 -i));;//star at the first digit
 
+        if(h != b){return 0;}
+        p/=10;
+        z = (z%powerOf10(counter -1 -i));
+    }    
 
-
-
+    return 1;
+ }
+ 
+ int power(int base, int exponent) {
+    if (exponent == 0) {return 1;}
+    
+    else {
+        int result = 1;
+        for (int i = 0; i < exponent; i++) {
+            result *= base;
+        }
+        return result;
+    }
 }
  
+ int isArmstrong (int x){
+    int counter = 0;
+    int y = x;
+    int z = x;
+    
+    while(y>=1){
+        y/=10;
+        counter++;
+    }
+    int arm = 0;
 
-
-int isArmStrong(int x)
-{
-int countDigits=0;
-int sum=0;
-int copyX=x;
-int copyX2=x;
-int dig=0;
-while (x>0)
-{
-    countDigits++;
-    copyX/10;
-}
-int copyCountDigits=countDigits;
-while (copyCountDigits>=0)
-{
-   dig =copyX2%10;
-   sum = sum+dig^countDigits;
-   if(x<sum){return 0;}
-   copyX2/10;
-   copyCountDigits--;
-}
-if(sum==x){return 1;}
-else {return    0;}
-
-
-}
+    for(int i = 1; i <= counter; i++){
+        int sum = z%10;
+        arm += power(sum, counter);
+        if(x < arm){return 0;}
+        z/=10;
+    }
+    
+    return (arm == x) ? 1 : 0;
+ }
